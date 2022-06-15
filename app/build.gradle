@@ -1,26 +1,35 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
-    compileSdkVersion 29
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["compile_sdk"]
+    buildToolsVersion globalConfiguration["build_tools_version"]
+
     defaultConfig {
+        minSdkVersion globalConfiguration["min_sdk"]
+        targetSdkVersion globalConfiguration["target_sdk"]
+        versionCode globalConfiguration["version_code"]
+        versionName globalConfiguration["version_app"]
         applicationId "com.picpay.desafio.android"
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        vectorDrawables.useSupportLibrary = true
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner globalConfiguration["test_instrumentation_runner"]
     }
+
+    viewBinding {
+        enabled = globalConfiguration["view_binding"]
+    }
+
     buildTypes {
-        debug {}
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
 
         release {
             minifyEnabled true
@@ -40,53 +49,32 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def dep = rootProject.ext
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Exclusive Project Dependencies
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_compiler_version"
 
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-
-    implementation "com.google.android.material:material:$material_version"
-
-    implementation "org.koin:koin-core:$koin_version"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
-
-    implementation "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
-
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "com.squareup.picasso:picasso:$picasso_version"
+    implementation "de.hdodenhof:circleimageview:$circleview_version"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
 
-    implementation "com.squareup.picasso:picasso:$picasso_version"
-    implementation "de.hdodenhof:circleimageview:$circleimageview_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito:mockito-core:$mockito_version"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
-    testImplementation "androidx.arch.core:core-testing:$core_testing_version"
-    implementation "org.koin:koin-test:$koin_version"
+    // Default Dependencies App
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$dep.core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$dep.appcompat_version"
+    implementation "com.google.android.material:material:$dep.material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$dep.constraintlayout_version"
 
-    androidTestImplementation "androidx.test:runner:$test_runner_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    androidTestImplementation "androidx.test:core-ktx:$core_ktx_test_version"
+    // Default Dependencies Unit Test
+    testImplementation "junit:junit:$dep.junit_version"
+
+    // Default Dependencies Android Test
+    androidTestImplementation "androidx.test.ext:junit:$dep.test_ext_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$dep.test_espresso_version"
 }

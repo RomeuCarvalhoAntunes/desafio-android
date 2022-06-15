@@ -1,0 +1,38 @@
+ext {
+    // Android Config
+    min_sdk = 21
+    target_sdk = 32
+    compile_sdk = 32
+    version_code = 1
+    version_app = '0.0.1'
+    view_binding = true
+    build_tools_version = "30.0.3"
+    test_instrumentation_runner = "androidx.test.runner.AndroidJUnitRunner"
+    consumer_proguard_files = "consumer-rules.pro"
+
+
+    // Exclusive Project Dependencies
+    hilt_version = '2.42'
+    hilt_compiler_version = '2.42'
+
+    picasso_version = '2.71828'
+    circleview_version = '3.0.0'
+
+    retrofit_version = '2.9.0'
+
+    gson_version = '2.9.0'
+
+    // Default Dependencies App
+    kotlin_version = '1.6.21'
+    core_ktx_version = '1.8.0'
+    appcompat_version = '1.4.2'
+    material_version = "1.6.1"
+    constraintlayout_version = '2.1.4'
+
+    // Default Dependencies Unit Test
+    junit_version = '4.13.2'
+
+    // Default Dependencies Android Test
+    test_ext_version = '1.1.3'
+    test_espresso_version = '3.4.0'
+}
