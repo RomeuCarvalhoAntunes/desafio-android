@@ -13,14 +13,17 @@ ext {
 
     // Exclusive Project Dependencies
     hilt_version = '2.42'
-    hilt_compiler_version = '2.42'
-
+    // Retrofit
+    retrofit_version = '2.9.0'
+    // OkHttp3
+    okhttp_version = '5.0.0-alpha.7'
+    // Room
+    room_version = '2.4.2'
+    // Gson
+    gson_version = '2.9.0'
+    // Picasso
     picasso_version = '2.71828'
     circleview_version = '3.0.0'
-
-    retrofit_version = '2.9.0'
-
-    gson_version = '2.9.0'
 
     // Default Dependencies App
     kotlin_version = '1.6.21'
@@ -28,6 +31,8 @@ ext {
     appcompat_version = '1.4.2'
     material_version = "1.6.1"
     constraintlayout_version = '2.1.4'
+    androidx_lifecycle_version = '2.4.1'
+    androidx_fragment_version = '1.4.1'
 
     // Default Dependencies Unit Test
     junit_version = '4.13.2'
