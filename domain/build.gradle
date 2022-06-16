@@ -1,24 +1,19 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'dagger.hilt.android.plugin'
 }
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
-
     compileSdkVersion globalConfiguration["compile_sdk"]
-    buildToolsVersion globalConfiguration["build_tools_version"]
 
     defaultConfig {
         minSdkVersion globalConfiguration["min_sdk"]
         targetSdkVersion globalConfiguration["target_sdk"]
-        versionCode globalConfiguration["version_code"]
-        versionName globalConfiguration["version_app"]
-        applicationId "com.picpay.desafio.android"
-        testInstrumentationRunner globalConfiguration["test_instrumentation_runner"]
+        consumerProguardFiles globalConfiguration["consumer_proguard_files"]
     }
 
     viewBinding {
@@ -26,25 +21,19 @@ android {
     }
 
     buildTypes {
-        debug {
-            minifyEnabled false
-            shrinkResources false
-        }
-
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
 }
 
@@ -52,22 +41,14 @@ dependencies {
     def dep = rootProject.ext
 
     implementation project(':data')
-    implementation project(':domain')
 
     // Exclusive Project Dependencies
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-    implementation "com.squareup.picasso:picasso:$picasso_version"
-    implementation "de.hdodenhof:circleimageview:$circleview_version"
-
     // Default Dependencies App
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$dep.core_ktx_version"
     implementation "androidx.appcompat:appcompat:$dep.appcompat_version"
-    implementation "androidx.constraintlayout:constraintlayout:$dep.constraintlayout_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
-    implementation "androidx.fragment:fragment-ktx:$androidx_fragment_version"
     implementation "com.google.android.material:material:$dep.material_version"
 
     // Default Dependencies Unit Test
