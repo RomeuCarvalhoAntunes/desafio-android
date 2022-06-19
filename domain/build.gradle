@@ -47,8 +47,11 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Default Dependencies App
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.core:core-ktx:$dep.core_ktx_version"
     implementation "androidx.appcompat:appcompat:$dep.appcompat_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle_version"
+    implementation "androidx.fragment:fragment-ktx:$androidx_fragment_version"
     implementation "com.google.android.material:material:$dep.material_version"
 
     // Default Dependencies Unit Test

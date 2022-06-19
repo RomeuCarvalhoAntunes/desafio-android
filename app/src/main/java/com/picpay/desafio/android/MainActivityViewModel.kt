@@ -2,8 +2,8 @@ package com.picpay.desafio.android
 
 import androidx.lifecycle.*
 import com.picpay.desafio.android.data.local.database.entities.UserEntity
-import com.picpay.desafio.android.data.repository.UserRepository
 import com.picpay.desafio.android.data.utils.DataState
+import com.picpay.desafio.android.domain.usecases.UserUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val userRepository: UserRepository,
+    private val userRepository: UserUseCases,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
