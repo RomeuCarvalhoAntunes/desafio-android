@@ -16,16 +16,16 @@ class MainActivityViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _dataStateUsers: MutableLiveData<DataState<List<UserEntity>>> =
+    private val _dataStateUsers: MutableLiveData<DataState<List<UserEntity>?>> =
         MutableLiveData()
-    val dataStateUsers: LiveData<DataState<List<UserEntity>>>
+    val dataStateUsers: LiveData<DataState<List<UserEntity>?>>
         get() = _dataStateUsers
 
     fun setStateEventUsers(userStateEvent: UserStateEvent) {
         viewModelScope.launch {
             when (userStateEvent) {
                 is UserStateEvent.getUsersEvent -> {
-                    userRepository.getUsers().onEach {
+                    userRepository.getUsersFromServer().onEach {
                         _dataStateUsers.value = it
                     }.launchIn(viewModelScope)
                 }

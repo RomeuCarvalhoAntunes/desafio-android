@@ -13,14 +13,14 @@ interface UserDao {
     suspend fun insertUser(user: UserEntity): Long
 
     @Query("SELECT * FROM user")
-    suspend fun getUsers(
-    ): List<UserEntity>
+    suspend fun getAllUsers(
+    ): List<UserEntity>?
 
     @Query("SELECT * FROM user WHERE username=:username")
     suspend fun getUserByUsername(
         username: String,
-    ): UserEntity
+    ): UserEntity?
 
-    @Query("DELETE FROM user")
-    suspend fun deleteAll()
+    @Query("DELETE FROM user WHERE username=:username")
+    suspend fun deleteUser(username: String) : Int
 }

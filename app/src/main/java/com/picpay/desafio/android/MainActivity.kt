@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                     val adapter = UserListAdapter()
                     binding.recyclerView.adapter = adapter
                     binding.recyclerView.layoutManager = LinearLayoutManager(this)
-                    adapter.users = dataState.data
+                    adapter.users = dataState.data!!
                 }
             }
         }
