@@ -1,7 +1,7 @@
-package com.picpay.desafio.android.data.models.user.mapper
+package com.picpay.desafio.android.data.mappers
 
 import com.picpay.desafio.android.data.local.database.entities.UserEntity
-import com.picpay.desafio.android.data.models.user.response.UserModel
+import com.picpay.desafio.android.data.network.models.UserModel
 
 object UserMap {
     fun fromDBArray(usersEntity: List<UserEntity>): List<UserModel> = usersEntity.map { UserModel(it.id, it.name, it.imgUrl, it.username) }

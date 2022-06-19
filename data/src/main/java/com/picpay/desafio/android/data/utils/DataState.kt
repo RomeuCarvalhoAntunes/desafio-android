@@ -1,4 +1,4 @@
-package com.picpay.desafio.android.data.state
+package com.picpay.desafio.android.data.utils
 
 sealed class DataState<out R> {
     data class Success<out T>(val data: T) : DataState<T>()

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.picpay.desafio.android.data.state.DataState
+import com.picpay.desafio.android.data.utils.DataState
 import com.picpay.desafio.android.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

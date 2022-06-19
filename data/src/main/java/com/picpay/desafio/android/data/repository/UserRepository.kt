@@ -3,10 +3,10 @@ package com.picpay.desafio.android.data.repository
 import android.util.Log
 import com.picpay.desafio.android.data.local.database.entities.UserEntity
 import com.picpay.desafio.android.data.local.source.UserCacheDataSource
-import com.picpay.desafio.android.data.models.user.mapper.UserMap
-import com.picpay.desafio.android.data.models.user.response.UserModel
+import com.picpay.desafio.android.data.mappers.UserMap
+import com.picpay.desafio.android.data.network.models.UserModel
 import com.picpay.desafio.android.data.network.source.UserNetworkDataSource
-import com.picpay.desafio.android.data.state.DataState
+import com.picpay.desafio.android.data.utils.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception

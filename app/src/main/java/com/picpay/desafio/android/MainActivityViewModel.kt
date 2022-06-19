@@ -3,7 +3,7 @@ package com.picpay.desafio.android
 import androidx.lifecycle.*
 import com.picpay.desafio.android.data.local.database.entities.UserEntity
 import com.picpay.desafio.android.data.repository.UserRepository
-import com.picpay.desafio.android.data.state.DataState
+import com.picpay.desafio.android.data.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
