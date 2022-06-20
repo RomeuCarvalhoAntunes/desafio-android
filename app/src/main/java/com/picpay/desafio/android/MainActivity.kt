@@ -1,6 +1,7 @@
 package com.picpay.desafio.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.e(TAG, mainActivityViewModel.toString())
     }
 
     override fun onResume() {

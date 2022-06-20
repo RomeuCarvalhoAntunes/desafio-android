@@ -13,7 +13,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val userRepository: UserUseCases,
-    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _dataStateUsers: MutableLiveData<DataState<List<UserEntity>?>> =
