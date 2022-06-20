@@ -3,14 +3,13 @@ package com.picpay.desafio.android.data.repository
 import com.picpay.desafio.android.data.local.database.entities.UserEntity
 import com.picpay.desafio.android.data.local.source.UserCacheDataSource
 import com.picpay.desafio.android.data.mappers.UserMap
-import com.picpay.desafio.android.data.network.models.UserModel
 import com.picpay.desafio.android.data.network.source.UserNetworkDataSource
 import com.picpay.desafio.android.data.utils.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 interface UserRepository {
-    suspend fun getUsersFromServer(): Flow<DataState<List<UserEntity>?>>
+    suspend fun getUsers(): Flow<DataState<List<UserEntity>?>>
     suspend fun insertUser(user: UserEntity): Long
     suspend fun getAllUsers(
     ): List<UserEntity>?
@@ -29,7 +28,7 @@ class UserRepositoryImpl(
 
     private val TAG = UserRepositoryImpl::class.java.simpleName
 
-    override suspend fun getUsersFromServer(): Flow<DataState<List<UserEntity>?>> = flow {
+    override suspend fun getUsers(): Flow<DataState<List<UserEntity>?>> = flow {
         emit(DataState.Loading)
         try {
             val networkResponse = network.getUsers()
@@ -47,7 +46,9 @@ class UserRepositoryImpl(
                 emit(DataState.Error(Exception("Could not find any contacts from server")))
             }
         } catch (e: Exception) {
-            emit(DataState.Error(e))
+            flow {
+                emit(DataState.Error(e))
+            }
         }
     }
 

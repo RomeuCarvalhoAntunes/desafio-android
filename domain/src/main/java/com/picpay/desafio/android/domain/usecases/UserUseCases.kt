@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserUseCases {
     suspend fun deleteUser(username: String): Int
     suspend fun addNewUser(user: UserEntity): Long
-    suspend fun getUsersFromServer(): Flow<DataState<List<UserEntity>?>>
+    suspend fun getUsers(): Flow<DataState<List<UserEntity>?>>
 //    suspend fun syncUsersWithServer()
 }
 
@@ -21,8 +21,8 @@ class UserUseCasesImpl(private val repository: UserRepository) : UserUseCases {
         return repository.deleteUser(username)
     }
 
-    override suspend fun getUsersFromServer(): Flow<DataState<List<UserEntity>?>> {
-        return repository.getUsersFromServer()
+    override suspend fun getUsers(): Flow<DataState<List<UserEntity>?>> {
+        return repository.getUsers()
     }
     //    override suspend fun syncUsersWithServer() {
 //        // todo ex

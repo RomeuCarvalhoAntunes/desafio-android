@@ -25,7 +25,7 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             when (userStateEvent) {
                 is UserStateEvent.getUsersEvent -> {
-                    userRepository.getUsersFromServer().onEach {
+                    userRepository.getUsers().onEach {
                         _dataStateUsers.value = it
                     }.launchIn(viewModelScope)
                 }
